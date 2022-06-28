@@ -3,6 +3,9 @@ module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
+      fontSize: {
+        ['4.5xl']: ['2.5rem', '1'],
+      },
       colors: {
         blue: '#5fbff9',
         black: '#252525',
