@@ -1,0 +1,17 @@
+---
+import About from "./About.astro";
+import Background from "./Background.astro";
+---
+
+<section class="flex flex-col mx-auto max-w-screen-2xl px-6 pt-28  pb-[30%] z-10 gap-[5%] justify-between 
+  overflow-hidden sm:px-12 sm:pt-48 sm:pb-[15%] md:flex-row lg:h-screen lg:max-h-[52rem]">
+  <div class="h-max mb-28 w-fit relative md:mb-0">
+    <h1 class="flex flex-col">
+      <span class="font-extrabold text-4.5xl lg:text-5xl">Hello, I&apos;m 👋</span>
+      <span class="font-extrabold text-4.5xl lg:text-5xl">Hurevych Kostiantyn</span>
+      <span class="font-bold text-blue text-xl lg:text-2xl">Front-end Developer</span>
+    </h1>
+    <Background />
+  </div>
+  <About />
+</section>

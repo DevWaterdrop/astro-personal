@@ -1,0 +1,73 @@
+---
+import clsx from 'clsx';
+
+const icons = [
+  { src: './icons/javascript.svg' },
+  { src: './icons/next.svg' },
+  { src: './icons/react.svg' },
+  { src: './icons/svelte.svg' },
+  { src: './icons/typescript.svg' },
+  { src: './icons/tailwind.svg', classes: 'hidden md:block' }
+]
+---
+
+<div
+  class="flex bottom-1/2 left-[45%] -z-10 absolute select-none items-center sm:bottom-[70%] lg:bottom-1/2 lg:left-2/4"
+  aria-hidden="true">
+  {icons.map((icon,index)=>(
+  <img class={clsx('min-w-[3rem] opacity-0 absolute lg:min-w-[4rem]', icon.classes)} src={icon.src}
+    data-animBackground={`icon-${index}`} />
+  ))}
+</div>
+
+<script>
+  import anime from 'animejs';
+
+  const X = ['-325%', '200%', '-315%', '75%', '275%', '-65%'];
+  const Y = ['275%', '-115%', '-150%', '175%', '325%', '650%'];
+  const ROTATES = [
+    [35, -35], [-15, 15],
+    [-75, 75], [-10, 10],
+    [-25, 25], [35, -35]
+  ];
+
+  interface Config {
+    target: Element,
+    x: string,
+    y: string,
+    rotate: number[],
+    delay?: number
+  }
+
+  function playIconAnim({ x, y, rotate, delay = 0, target }: Config) {
+    anime({
+      targets: target,
+      translateX: x,
+      translateY: y,
+      rotate: rotate,
+      opacity: { value: [0, 1], delay: delay + 100 },
+      easing: 'spring(1, 45, 10, 0)',
+      delay,
+      complete: () => {
+        target.addEventListener('mouseenter', () => {
+          return void anime({
+            targets: target,
+            rotate: () => anime.random(-360, 360)
+          });
+        }, false)
+      }
+    });
+  }
+
+  const targets = document.querySelectorAll('[data-animBackground]')
+
+  targets.forEach((element, index) => {
+    playIconAnim({
+      target: element,
+      x: X[index],
+      y: Y[index],
+      delay: index * 100,
+      rotate: ROTATES[index]
+    })
+  })
+</script>

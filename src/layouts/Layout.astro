@@ -1,3 +1,9 @@
+---
+const title = 'Waterdrop'
+const description = '22 year old Ukrainian front end developer'
+const coverLink = "https://watedrop.dev/images/cover.png";
+---
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,10 +11,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <title>Waterdrop</title>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Hurevych Kostiantyn">
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={coverLink} />
+  <meta name="twitter:image" content={coverLink} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#000000" />
 </head>
 
-<body class="color-black">
+<body class="flex flex-col min-h-screen justify-between color-black">
   <slot />
 </body>
 
