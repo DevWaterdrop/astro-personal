@@ -62,12 +62,19 @@ const icons = [
   const targets = document.querySelectorAll('[data-animBackground]')
 
   targets.forEach((element, index) => {
-    playIconAnim({
-      target: element,
-      x: X[index],
-      y: Y[index],
-      delay: index * 100,
-      rotate: ROTATES[index]
-    })
+    if (element instanceof HTMLImageElement) {
+      function localPlayIconAnim() {
+        playIconAnim({
+          target: element,
+          x: X[index],
+          y: Y[index],
+          delay: index * 100,
+          rotate: ROTATES[index]
+        })
+      }
+
+      if (element.complete) return void localPlayIconAnim();
+      return element.onload = () => localPlayIconAnim();
+    }
   })
 </script>
