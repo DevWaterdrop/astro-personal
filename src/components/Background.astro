@@ -14,9 +14,10 @@ const icons = [
 <div
   class="flex bottom-1/2 left-[45%] -z-10 absolute select-none items-center sm:bottom-[70%] lg:bottom-1/2 lg:left-2/4"
   aria-hidden="true">
-  {icons.map((icon,index)=>(
-  <img class={clsx('min-w-[3rem] opacity-0 absolute lg:min-w-[4rem]', icon.classes)} src={icon.src}
-    data-animBackground={`icon-${index}`} />
+  {icons.map((icon, index)=>(
+  <div class="opacity-0 absolute" data-animBackground={`icon-${index}`}>
+    <img class={clsx('min-w-[3rem] lg:min-w-[4rem]', icon.classes)} src={icon.src} />
+  </div>
   ))}
 </div>
 
@@ -40,7 +41,7 @@ const icons = [
   }
 
   function playIconAnim({ x, y, rotate, delay = 0, target }: Config) {
-    anime({
+    return void anime({
       targets: target,
       translateX: x,
       translateY: y,
@@ -48,23 +49,26 @@ const icons = [
       opacity: { value: [0, 1], delay: delay + 100 },
       easing: 'spring(1, 45, 10, 0)',
       delay,
-      complete: () => {
-        target.addEventListener('mouseenter', () => {
-          return void anime({
-            targets: target,
-            rotate: () => anime.random(-360, 360)
-          });
-        }, false)
-      }
     });
   }
 
   const targets = document.querySelectorAll('[data-animBackground]')
 
   targets.forEach((element, index) => {
-    if (element instanceof HTMLImageElement) {
+    const [children] = element.children;
+
+    if (children && children instanceof HTMLImageElement) {
+      function setupMouseEvent() {
+        element.addEventListener('mouseenter', () => {
+          return void anime({
+            targets: children,
+            rotate: () => anime.random(-360, 360)
+          });
+        }, false)
+      }
+
       function localPlayIconAnim() {
-        playIconAnim({
+        return void playIconAnim({
           target: element,
           x: X[index],
           y: Y[index],
@@ -73,8 +77,13 @@ const icons = [
         })
       }
 
-      if (element.complete) return void localPlayIconAnim();
-      return element.onload = () => localPlayIconAnim();
+      function initAfterImageLoad() {
+        setupMouseEvent();
+        return localPlayIconAnim();
+      }
+
+      if (children.complete) return initAfterImageLoad();
+      return children.onload = () => initAfterImageLoad();
     }
   })
 </script>
