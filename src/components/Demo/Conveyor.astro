@@ -1,20 +1,20 @@
 ---
-import clsx from 'clsx';
-import { Picture } from '@astrojs/image/components';
-import fullpagePNG from '../../assets/fullpage.png';
+import clsx from "clsx";
+import { Picture } from "@astrojs/image/components";
+import fullpagePNG from "../../assets/fullpage.png";
 
 const containerClass = clsx(
-  'h-full w-full py-12 absolute overflow-hidden',
-  'bg-white opacity-[0.25] blur-[7px]',
-  'md:opacity-100 md:w-1/2 md:relative md:blur-none'
+  "h-full w-full py-12 absolute overflow-hidden",
+  "bg-white opacity-[0.25] blur-[7px]",
+  "md:opacity-100 md:w-1/2 md:relative md:blur-none"
 );
 
 const innerClass = clsx(
-  'absolute w-full top-1/2 left-0 -translate-y-1/2 transform-gpu',
-  'flex flex-col items-center justify-center',
-  'will-change-transform',
-  'lg:top-[60%]',
-  'xl:top-[75%]'
+  "absolute w-full top-1/2 left-0 -translate-y-1/2 transform-gpu",
+  "flex flex-col items-center justify-center",
+  "will-change-transform",
+  "lg:top-[60%]",
+  "xl:top-[75%]"
 );
 ---
 
@@ -25,7 +25,7 @@ const innerClass = clsx(
         src={fullpagePNG}
         widths={[320, 672, 768, 1344, 1536]}
         sizes="(min-width: 768px) 50vw, 100vw"
-        formats={['avif', 'webp']}
+        formats={["avif", "webp"]}
         aspectRatio="2880:4468"
         loading="eager"
         alt=""
@@ -35,7 +35,7 @@ const innerClass = clsx(
 </div>
 
 <script>
-  import anime from 'animejs';
+  import anime from "animejs";
 
   const imagesContainerEl = document.querySelector(
     '[data-animEcommerce="img"]'
@@ -46,8 +46,8 @@ const innerClass = clsx(
 
     const animation = anime({
       targets: imagesContainerEl,
-      translateY: ['-30%', '0%'],
-      easing: 'easeInOutSine',
+      translateY: ["-30%", "0%"],
+      easing: "easeInOutSine",
       autoplay: false,
     });
 
@@ -71,12 +71,12 @@ const innerClass = clsx(
 
       if (isIntersecting && !onScrollAplied) {
         onScrollAplied = true;
-        return document.addEventListener('scroll', onScrollHandler);
+        return document.addEventListener("scroll", onScrollHandler);
       }
 
       if (!isIntersecting) {
         onScrollAplied = false;
-        return document.removeEventListener('scroll', onScrollHandler);
+        return document.removeEventListener("scroll", onScrollHandler);
       }
     };
 

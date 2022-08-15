@@ -1,43 +1,52 @@
 ---
-import clsx from 'clsx';
+import clsx from "clsx";
 
 const icons = [
-  { src: './icons/javascript.svg' },
-  { src: './icons/next.svg' },
-  { src: './icons/react.svg' },
-  { src: './icons/svelte.svg' },
-  { src: './icons/typescript.svg' },
-  { src: './icons/tailwind.svg', classes: 'hidden md:block' }
-]
+  { src: "./icons/javascript.svg" },
+  { src: "./icons/next.svg" },
+  { src: "./icons/react.svg" },
+  { src: "./icons/svelte.svg" },
+  { src: "./icons/typescript.svg" },
+  { src: "./icons/tailwind.svg", classes: "hidden md:block" },
+];
 ---
 
 <div
   class="flex bottom-1/2 left-[45%] -z-10 absolute select-none items-center sm:bottom-[70%] lg:bottom-1/2 lg:left-2/4"
-  aria-hidden="true">
-  {icons.map((icon, index)=>(
-  <div class="opacity-0 absolute" data-animBackground={`icon-${index}`}>
-    <img class={clsx('min-w-[3rem] lg:min-w-[4rem]', icon.classes)} src={icon.src} />
-  </div>
-  ))}
+  aria-hidden="true"
+>
+  {
+    icons.map((icon, index) => (
+      <div class="opacity-0 absolute" data-animBackground={`icon-${index}`}>
+        <img
+          class={clsx("min-w-[3rem] lg:min-w-[4rem]", icon.classes)}
+          src={icon.src}
+        />
+      </div>
+    ))
+  }
 </div>
 
 <script>
-  import anime from 'animejs';
+  import anime from "animejs";
 
-  const X = ['-325%', '200%', '-315%', '75%', '275%', '-65%'];
-  const Y = ['275%', '-115%', '-150%', '175%', '325%', '650%'];
+  const X = ["-325%", "200%", "-315%", "75%", "275%", "-65%"];
+  const Y = ["275%", "-115%", "-150%", "175%", "325%", "650%"];
   const ROTATES = [
-    [35, -35], [-15, 15],
-    [-75, 75], [-10, 10],
-    [-25, 25], [35, -35]
+    [35, -35],
+    [-15, 15],
+    [-75, 75],
+    [-10, 10],
+    [-25, 25],
+    [35, -35],
   ];
 
   interface Config {
-    target: Element,
-    x: string,
-    y: string,
-    rotate: number[],
-    delay?: number
+    target: Element;
+    x: string;
+    y: string;
+    rotate: number[];
+    delay?: number;
   }
 
   function playIconAnim({ x, y, rotate, delay = 0, target }: Config) {
@@ -47,24 +56,28 @@ const icons = [
       translateY: y,
       rotate: rotate,
       opacity: { value: [0, 1], delay: delay + 100 },
-      easing: 'spring(1, 45, 10, 0)',
+      easing: "spring(1, 45, 10, 0)",
       delay,
     });
   }
 
-  const targets = document.querySelectorAll('[data-animBackground]')
+  const targets = document.querySelectorAll("[data-animBackground]");
 
   targets.forEach((element, index) => {
     const [children] = element.children;
 
     if (children && children instanceof HTMLImageElement) {
       function setupMouseEvent() {
-        element.addEventListener('mouseenter', () => {
-          return void anime({
-            targets: children,
-            rotate: () => anime.random(-360, 360)
-          });
-        }, false)
+        element.addEventListener(
+          "mouseenter",
+          () => {
+            return void anime({
+              targets: children,
+              rotate: () => anime.random(-360, 360),
+            });
+          },
+          false
+        );
       }
 
       function localPlayIconAnim() {
@@ -73,8 +86,8 @@ const icons = [
           x: X[index],
           y: Y[index],
           delay: index * 100,
-          rotate: ROTATES[index]
-        })
+          rotate: ROTATES[index],
+        });
       }
 
       function initAfterImageLoad() {
@@ -83,7 +96,7 @@ const icons = [
       }
 
       if (children.complete) return initAfterImageLoad();
-      return children.onload = () => initAfterImageLoad();
+      return (children.onload = () => initAfterImageLoad());
     }
-  })
+  });
 </script>

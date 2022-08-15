@@ -1,5 +1,5 @@
 ---
-import clsx from 'clsx';
+import clsx from "clsx";
 
 interface Props {
   src: string;
@@ -9,11 +9,11 @@ interface Props {
 const { src, alt } = Astro.props as Props;
 
 const captionClass = clsx(
-  'absolute w-max px-2 bottom-[calc(100%+0.25rem)]',
-  'bg-black rounded-full opacity-0',
-  'text-white',
-  'transition-opacity duration-150 pointer-events-none select-none',
-  'group-hover:opacity-100'
+  "absolute w-max px-2 bottom-[calc(100%+0.25rem)]",
+  "bg-black rounded-full opacity-0",
+  "text-white",
+  "transition-opacity duration-150 pointer-events-none select-none",
+  "group-hover:opacity-100"
 );
 ---
 

@@ -2,56 +2,66 @@
 import Link from "./Link.astro";
 ---
 
-<nav class="flex mx-auto max-w-screen-2xl p-6 items-center justify-between sm:p-12">
-  <a class="font-extrabold text-center text-xl w-min break-words uppercase sm:text-2xl !leading-[0.9]" href="/"
-    title="waterdrop">
+<nav
+  class="flex mx-auto max-w-screen-2xl p-6 items-center justify-between sm:p-12"
+>
+  <a
+    class="font-extrabold text-center text-xl w-min break-words uppercase sm:text-2xl !leading-[0.9]"
+    href="/"
+    title="waterdrop"
+  >
     <span>Water</span>
     <span>Drop</span>
   </a>
   <ul class="flex font-semibold text-xl gap-4 sm:gap-8">
     <li>
-      <Link type='nav' href="mailto: dev.waterdrop@gmail.com" animate={false}>
-      Mail
+      <Link type="nav" href="mailto: dev.waterdrop@gmail.com" animate={false}>
+        Mail
       </Link>
     </li>
     <li>
-      <Link type='nav' href="https://github.com/DevWaterdrop" external animate={false}>
-      Github
+      <Link
+        type="nav"
+        href="https://github.com/DevWaterdrop"
+        external
+        animate={false}
+      >
+        Github
       </Link>
     </li>
   </ul>
 </nav>
 
 <script>
-  import anime from 'animejs'
+  import anime from "animejs";
 
-  import { getScrollPercent } from '../utils/getScrollPercent';
+  import { getScrollPercent } from "../utils/getScrollPercent";
 
-  const EASING = 'cubicBezier(0.1, 0.25, 0.3, 1)';
+  const EASING = "cubicBezier(0.1, 0.25, 0.3, 1)";
   const DURATION = 600;
   const PERCENTAGE_NAV_HIDDEN = 68;
   const PX_NAV_TRIGGER = 50;
 
-  const nav = document.querySelector('nav');
-  anime.set('nav', { translateY: '-25%', opacity: 0 })
+  const nav = document.querySelector("nav");
+  anime.set("nav", { translateY: "-25%", opacity: 0 });
 
   let prevScroll = window.scrollY;
   let hidden = true;
 
   function controllNav(reverse: boolean = false) {
-    if (!nav) throw new Error('<nav/> not found!');
+    if (!nav) throw new Error("<nav/> not found!");
 
-    anime.remove('nav');
+    anime.remove("nav");
 
     anime({
-      targets: 'nav',
-      translateY: reverse ? '-25%' : 0,
+      targets: "nav",
+      translateY: reverse ? "-25%" : 0,
       opacity: reverse ? 0 : 1,
       easing: EASING,
-      duration: DURATION
+      duration: DURATION,
     });
 
-    nav.style.pointerEvents = reverse ? 'none' : 'auto'
+    nav.style.pointerEvents = reverse ? "none" : "auto";
   }
 
   function scroll() {
@@ -62,17 +72,17 @@ import Link from "./Link.astro";
     const percentage = getScrollPercent();
 
     if (percentage >= PERCENTAGE_NAV_HIDDEN) {
-      if (!hidden) controllNav(true)
-      hidden = true
+      if (!hidden) controllNav(true);
+      hidden = true;
       return;
     }
 
     if (currentScroll < prevScroll) {
-      if (hidden) controllNav()
-      hidden = false
+      if (hidden) controllNav();
+      hidden = false;
     } else if (currentScroll > PX_NAV_TRIGGER && currentScroll > prevScroll) {
-      if (!hidden) controllNav(true)
-      hidden = true
+      if (!hidden) controllNav(true);
+      hidden = true;
     }
 
     prevScroll = currentScroll;
@@ -80,9 +90,9 @@ import Link from "./Link.astro";
   }
 
   if (prevScroll < PX_NAV_TRIGGER) {
-    controllNav()
+    controllNav();
     hidden = false;
   }
 
-  window.addEventListener('scroll', scroll)
+  window.addEventListener("scroll", scroll);
 </script>

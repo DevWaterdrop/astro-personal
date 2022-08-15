@@ -4,7 +4,9 @@ import Link from "./Link.astro";
 
 <footer class="bg-footer text-white w-full relative">
   <dav class="flex flex-col mx-auto max-w-screen-2xl p-8 gap-12 sm:p-12">
-    <div class="flex flex-col flex-wrap text-base w-full gap-12 justify-between sm:flex-row">
+    <div
+      class="flex flex-col flex-wrap text-base w-full gap-12 justify-between sm:flex-row"
+    >
       <address class="not-italic sm:w-1/2">
         <h3>Location</h3>
         <p>
@@ -18,21 +20,27 @@ import Link from "./Link.astro";
         <li>
           <h3>Email</h3>
           <Link href="mailto: dev.waterdrop@gmail.com">
-          dev.waterdrop@gmail.com
+            dev.waterdrop@gmail.com
           </Link>
         </li>
         <li>
           <h3>Github</h3>
           <Link href="https://github.com/DevWaterdrop" external>
-          DevWaterdrop
+            DevWaterdrop
           </Link>
         </li>
       </ul>
     </div>
     <div class="flex justify-between items-center">
-      <span class="text-sm opacity-[0.55] pointer-events-none select-none">STOP WAR</span>
-      <Link href="https://github.com/DevWaterdrop/astro-personal" classes="capitalize" external>
-      Site repository
+      <span class="text-sm opacity-[0.55] pointer-events-none select-none"
+        >STOP WAR
+      </span>
+      <Link
+        href="https://github.com/DevWaterdrop/astro-personal"
+        classes="capitalize"
+        external
+      >
+        Site repository
       </Link>
     </div>
   </dav>
