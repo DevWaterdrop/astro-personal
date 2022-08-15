@@ -1,47 +1,44 @@
 ---
-const title = 'Waterdrop'
-const description = '22-year-old Ukrainian front-end developer'
-const coverLink = "https://www.waterdrop.dev/images/cover.png";
+const title = 'Waterdrop';
+const description = '22-year-old Ukrainian front-end developer';
+const coverLink = 'https://www.waterdrop.dev/images/cover.png';
 ---
 
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Hurevych Kostiantyn" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={coverLink} />
+    <meta name="twitter:image" content={coverLink} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#000000" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <meta name="author" content="Hurevych Kostiantyn">
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content={coverLink} />
-  <meta name="twitter:image" content={coverLink} />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#000000" />
-</head>
+  <body class="flex flex-col min-h-screen text-black justify-between">
+    <slot />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
 
-<body class="flex flex-col min-h-screen justify-between color-black">
-  <slot />
-</body>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Nunito', sans-serif;
+      }
 
+      html,
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        scroll-behavior: smooth;
+      }
+    </style>
+  </body>
 </html>
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Nunito', sans-serif;
-  }
-
-  html,
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
-  }
-</style>

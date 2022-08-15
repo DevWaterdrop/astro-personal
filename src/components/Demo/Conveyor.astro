@@ -1,0 +1,88 @@
+---
+import clsx from 'clsx';
+import { Picture } from '@astrojs/image/components';
+import fullpagePNG from '../../assets/fullpage.png';
+
+const containerClass = clsx(
+  'h-full w-full py-12 absolute overflow-hidden',
+  'bg-white opacity-[0.25] blur-[7px]',
+  'md:opacity-100 md:w-1/2 md:relative md:blur-none'
+);
+
+const innerClass = clsx(
+  'absolute w-full top-1/2 left-0 -translate-y-1/2 transform-gpu',
+  'flex flex-col items-center justify-center',
+  'will-change-transform',
+  'lg:top-[60%]',
+  'xl:top-[75%]'
+);
+---
+
+<div class={containerClass} aria-hidden="true">
+  <div class={innerClass}>
+    <div class="bg-white w-full relative" data-animEcommerce="img">
+      <Picture
+        src={fullpagePNG}
+        widths={[320, 672, 768, 1344, 1536]}
+        sizes="(min-width: 768px) 50vw, 100vw"
+        formats={['avif', 'webp']}
+        aspectRatio="2880:4468"
+        loading="eager"
+        alt=""
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  import anime from 'animejs';
+
+  const imagesContainerEl = document.querySelector(
+    '[data-animEcommerce="img"]'
+  );
+
+  if (imagesContainerEl) {
+    let onScrollAplied = false;
+
+    const animation = anime({
+      targets: imagesContainerEl,
+      translateY: ['-30%', '0%'],
+      easing: 'easeInOutSine',
+      autoplay: false,
+    });
+
+    const onScrollHandler = () => {
+      const { y, height } = imagesContainerEl.getBoundingClientRect();
+
+      const bound = y + window.scrollY - height;
+
+      const inBounds = Math.min(Math.max(window.scrollY, bound), height);
+      const normalized = (inBounds - bound) / (height - bound);
+
+      animation.seek(animation.duration * normalized);
+    };
+
+    const observerHandler: IntersectionObserverCallback = (entries) => {
+      const [firstEntry] = entries;
+
+      if (!firstEntry) return;
+
+      const { isIntersecting } = firstEntry;
+
+      if (isIntersecting && !onScrollAplied) {
+        onScrollAplied = true;
+        return document.addEventListener('scroll', onScrollHandler);
+      }
+
+      if (!isIntersecting) {
+        onScrollAplied = false;
+        return document.removeEventListener('scroll', onScrollHandler);
+      }
+    };
+
+    const observer = new IntersectionObserver(observerHandler);
+    observer.observe(imagesContainerEl);
+
+    onScrollHandler();
+  }
+</script>
