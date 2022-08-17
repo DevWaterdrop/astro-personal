@@ -1,34 +1,31 @@
 <div class="transform bottom-6 left-1/2 -translate-x-1/2 absolute md:bottom-12">
   <a
-    class="opacity-0 inline-block"
+    class="opacity-0 inline-block will-change-transform arrowLoop"
     href="#demo"
     title="Demo"
-    data-animLinkToBottom=""
   >
     <div class="h-8 w-8 relative pointer-events-none" aria-hidden="true">
-      <img class="h-full w-full" src="./icons/down.svg" />
+      <img class="h-full w-full" src="./icons/down.svg" alt="" />
     </div>
   </a>
 </div>
 
-<script>
-  import anime from "animejs";
-
-  const linkEl = document.querySelector('[data-animLinkToBottom=""]');
-
-  if (linkEl) {
-    anime({
-      targets: linkEl,
-      scale: [1.25, 0.9],
-      translateY: [-16, 0],
-      opacity: [
-        { value: 0, duration: 500 },
-        { value: 1, duration: 1000 },
-        { value: 0, duration: 500 },
-      ],
-      easing: "easeInOutSine",
-      duration: 2000,
-      loop: true,
-    });
+<style>
+  .arrowLoop {
+    animation: 2s ease-in-out infinite arrowLoop;
   }
-</script>
+
+  @keyframes arrowLoop {
+    0% {
+      transform: translateY(-16px) scale(1.25);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0) scale(0.9);
+      opacity: 0;
+    }
+  }
+</style>
