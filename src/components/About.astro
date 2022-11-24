@@ -1,5 +1,5 @@
 ---
-import Link from "./Link.astro";
+import Link from './Link.astro';
 ---
 
 <div
@@ -10,19 +10,23 @@ import Link from "./Link.astro";
   <div
     class="flex flex-col flex-wrap text-lg gap-1 sm:text-xl sm:w-[90%] sm:gap-2 lg:text-2xl"
   >
-    <span data-animBio="text"
-      >I am a 22-year-old Ukrainian front-end developer.
-    </span>
-    <span data-animBio="text"
-      >Always happy to solve interesting problems and create convenient
+    <p data-animBio="text">I am a 23-year-old Ukrainian front-end developer.</p>
+    <p data-animBio="text">
+      Always happy to solve interesting problems and create convenient
       interactive web applications.
-    </span>
-    <span data-animBio="text">Ready to learn & improve 🙌</span>
+    </p>
+    <p data-animBio="text">Ready to learn & improve 🙌</p>
     <span class="md:w-max" data-animBio="text">
-      <b>🔧 Job:</b>
-      <Link href="http://www.halo-lab.com" external
-        >Halo Lab - Digital Agency
-      </Link>
+      <b>🇩🇪 Job:</b>
+      <Link href="https://meetergo.com" external>Meetergo GmbH</Link>
+      <span
+        class="flex mt-0.5 text-base ml-4 gap-1.5 items-end sm:text-lg lg:text-xl"
+      >
+        <b>🇺🇦 Previous:</b>
+        <Link href="http://www.halo-lab.com" external
+          >Halo Lab - Digital Agency
+        </Link>
+      </span>
     </span>
     <span data-animBio="text">
       <b>🎓 Education:</b>
@@ -30,29 +34,29 @@ import Link from "./Link.astro";
     </span>
     <span data-animBio="text">
       <b>🌍 Languages:</b>
-      Ukrainian, English, <span class="line-through">Russian</span>
+      English, Ukrainian, <span class="line-through">Russian</span>
     </span>
   </div>
 </div>
 
 <script>
-  import anime from "animejs";
+  import anime from 'animejs';
 
-  anime.set('[data-animBio="block"]', { opacity: 0, translateY: "-10%" });
-  anime.set('[data-animBio="text"]', { opacity: 0, translateY: "-2rem" });
+  anime.set('[data-animBio="block"]', { opacity: 0, translateY: '-10%' });
+  anime.set('[data-animBio="text"]', { opacity: 0, translateY: '-2rem' });
 
   anime({
     targets: '[data-animBio="block"]',
     translateY: 0,
     opacity: 1,
-    easing: "spring()",
+    easing: 'spring()',
   });
 
   anime({
     targets: '[data-animBio="text"]',
     translateY: 0,
-    opacity: { value: 1, easing: "linear", duration: 150 },
-    easing: "spring(1, 75, 10, 15)",
+    opacity: { value: 1, easing: 'linear', duration: 150 },
+    easing: 'spring(1, 75, 10, 15)',
     delay: anime.stagger(100),
   });
 </script>
