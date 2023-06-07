@@ -7,8 +7,8 @@ const sectionClass = clsx(
   'mx-auto max-w-screen-2xl px-6 pt-28 pb-12 relative overflow-hidden',
   'flex flex-col justify-between',
   'bg-white',
-  'sm:px-12 sm:pt-48',
-  'max-h-[52rem]'
+  'sm:px-12 sm:pt-48 sm:pb-24',
+  'max-h-[52rem] h-[min(100vh, 100%)]'
 );
 ---
 
@@ -23,9 +23,14 @@ const sectionClass = clsx(
           >Hurevych Kostiantyn
         </span>
         <span class="font-bold text-blue--dark text-xl lg:text-2xl"
-          >Front-end Developer
+          >Software engineer
         </span>
       </h1>
+      <img
+        class="opacity-[0.15] top-3/4 left-8 w-60 -rotate-10 absolute sm:top-2/3 sm:w-80"
+        src="./images/go-docker.png"
+        alt="golang & docker"
+      />
       <Background />
     </div>
     <About />
