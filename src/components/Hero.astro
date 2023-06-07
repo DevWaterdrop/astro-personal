@@ -27,12 +27,37 @@ const sectionClass = clsx(
         </span>
       </h1>
       <img
-        class="opacity-[0.15] top-3/4 left-8 w-60 -rotate-10 absolute sm:top-2/3 sm:w-80"
+        id="go-background"
+        class="opacity-[0.15] top-3/4 left-8 w-60 -rotate-10 select-none pointer-events-none absolute sm:top-2/3 sm:w-80"
         src="./images/go-docker.png"
         alt="golang & docker"
+        loading="lazy"
       />
       <Background />
     </div>
     <About />
   </div>
 </section>
+
+<script>
+  import anime from 'animejs';
+
+  (() => {
+    const target = document.querySelector('#go-background');
+
+    if (!target || !(target instanceof HTMLImageElement) || target.complete) {
+      return;
+    }
+
+    // only if img cached or not found
+    target.onload = () => {
+      anime({
+        targets: target,
+        opacity: [0, 0.15],
+        easing: 'easeInOutQuad',
+        duration: 300,
+      });
+    };
+    return;
+  })();
+</script>

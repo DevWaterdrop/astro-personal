@@ -101,7 +101,7 @@ const icons = [
         return localPlayIconAnim();
       }
 
-      if (children.complete) return initAfterImageLoad();
+      if (children.complete) return initAfterImageLoad(); // animate for cached img
       return (children.onload = () => initAfterImageLoad());
     }
   });
