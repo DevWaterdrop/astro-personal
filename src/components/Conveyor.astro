@@ -26,6 +26,7 @@ const innerClass = clsx(
   <div class={innerClass}>
     <div class="flex w-full relative items-center justify-center">
       <Picture
+        class="object-cover opacity-0"
         src={fullpageWEBP}
         widths={[320, 672, 768, 1344, 1536]}
         sizes="(min-width: 768px) 50vw, 100vw"
@@ -60,6 +61,13 @@ const innerClass = clsx(
     };
 
     const init = () => {
+      anime({
+        targets: imagesContainerEl,
+        opacity: 1,
+        duration: 500,
+        easing: 'easeInOutSine',
+      });
+
       onScrollHandler();
       document.addEventListener('scroll', onScrollHandler);
     };
