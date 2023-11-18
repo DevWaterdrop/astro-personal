@@ -1,0 +1,47 @@
+<div
+  aria-hidden="true"
+  class="rounded-[50%] -bottom-1/2 w-2/4 planet-background aspect-square absolute"
+>
+</div>
+
+<style is:global>
+  @keyframes planetRotation {
+    0% {
+      background-position: 0% 0%;
+      border: 0px solid #00000000;
+    }
+    100% {
+      background-position: 2000% 0%;
+      border: 0px solid #00000000;
+    }
+  }
+
+  .planet-background {
+    filter: blur(0.5px);
+    background-color: #a3a3a3;
+    background-repeat: repeat-x;
+    background-image: url('./images/moon.jpg');
+    background-size: 120% 100%;
+    opacity: 1;
+    animation-name: planetRotation;
+    animation-duration: 60s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards !important;
+    box-shadow: inset -10px 8px 6px -5px #d6d3d1d5,
+      inset 20px -20px 40px 30px rgba(0, 0, 0, 0.8),
+      7px -6px 14px rgba(255, 255, 255, 0.1);
+    transition-duration: 300ms;
+    transition-property: background-image, box-shadow, background-color;
+  }
+
+  a:hover > .planet-background,
+  a:focus > .planet-background,
+  a:focus-visible > .planet-background {
+    background-image: url('./images/planet.jpg');
+    background-color: #075687;
+    box-shadow: inset -10px 8px 6px -5px #6da4c6,
+      inset 20px -20px 40px 30px rgba(0, 0, 0, 0.8),
+      7px -6px 14px rgba(111, 181, 224, 0.1);
+  }
+</style>

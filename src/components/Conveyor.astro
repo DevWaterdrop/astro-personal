@@ -1,0 +1,73 @@
+---
+import clsx from 'clsx';
+import { Picture } from '@astrojs/image/components';
+import fullpageWEBP from '../../assets/demo-page.webp';
+
+const containerClass = clsx(
+  'outline-none appearance-none',
+  'h-full w-full py-12 absolute overflow-hidden',
+  'bg-stone-900 opacity-[0.25] blur-[7px]',
+  'md:opacity-100 md:w-1/2 md:relative md:blur-none'
+);
+
+const innerClass = clsx(
+  'absolute w-full top-1/2 left-0 -translate-y-1/2 transform-gpu',
+  'flex flex-col items-center justify-center',
+  'will-change-transform'
+);
+---
+
+<a
+  class={containerClass}
+  aria-hidden="true"
+  href="https://formi.waterdrop.dev/"
+  target="_blank"
+>
+  <div class={innerClass}>
+    <div class="flex w-full relative items-center justify-center">
+      <Picture
+        src={fullpageWEBP}
+        widths={[320, 672, 768, 1344, 1536]}
+        sizes="(min-width: 768px) 50vw, 100vw"
+        alt=""
+        data-animEcommerce="img"
+      />
+    </div>
+  </div>
+</a>
+
+<script>
+  import anime from 'animejs';
+  import { getScrollPercent } from '../utils/getScrollPercent';
+
+  const imagesContainerEl = document.querySelector(
+    '[data-animEcommerce="img"]'
+  ) as HTMLImageElement;
+
+  if (imagesContainerEl) {
+    const animation = anime({
+      targets: imagesContainerEl,
+      translateY: ['-15%', '5%'],
+      elasticity: 200,
+      easing: 'easeInOutSine',
+      autoplay: false,
+    });
+
+    const onScrollHandler = () => {
+      const scrollPercent = getScrollPercent();
+
+      animation.seek((scrollPercent / 100) * animation.duration);
+    };
+
+    const init = () => {
+      onScrollHandler();
+      document.addEventListener('scroll', onScrollHandler);
+    };
+
+    if (imagesContainerEl.complete) {
+      init();
+    } else {
+      imagesContainerEl.addEventListener('load', init);
+    }
+  }
+</script>

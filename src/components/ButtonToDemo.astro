@@ -1,0 +1,44 @@
+<div class="flex px-6 pt-4 pb-8 items-center justify-center sm:px-12 md:pb-12">
+  <button
+    class="outline-none opacity-0 scroll-smooth appearance-none inline-block select-none will-change-transform arrowLoop"
+    type="button"
+    data-demo-button
+  >
+    <div class="h-8 w-8 relative pointer-events-none" aria-hidden="true">
+      <img class="h-full w-full" src="./icons/down.svg" alt="" />
+    </div>
+  </button>
+</div>
+
+<style>
+  .arrowLoop {
+    animation: 2s ease-in-out infinite arrowLoop;
+  }
+
+  @keyframes arrowLoop {
+    0% {
+      transform: translateY(-16px) scale(1.25);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0) scale(0.9);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  const button = document.querySelector(
+    '[data-demo-button]'
+  ) as HTMLButtonElement | null;
+
+  button?.addEventListener('click', () => {
+    const getDemoSection = document.getElementById('demo');
+    if (!getDemoSection) return;
+
+    getDemoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+</script>
