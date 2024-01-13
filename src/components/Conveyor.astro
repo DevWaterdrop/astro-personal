@@ -1,19 +1,19 @@
 ---
-import clsx from 'clsx';
-import { Picture } from '@astrojs/image/components';
-import fullpageWEBP from '../../assets/demo-page.webp';
+import clsx from "clsx";
+import { Picture } from "astro:assets";
+import fullpageWEBP from "../../assets/demo-page.webp";
 
 const containerClass = clsx(
-  'outline-none appearance-none',
-  'h-full w-full py-12 absolute overflow-hidden',
-  'bg-stone-900 opacity-[0.25] blur-[7px]',
-  'md:opacity-100 md:w-1/2 md:relative md:blur-none'
+  "outline-none appearance-none",
+  "h-full w-full py-12 absolute overflow-hidden",
+  "bg-stone-900 opacity-[0.25] blur-[7px]",
+  "md:opacity-100 md:w-1/2 md:relative md:blur-none",
 );
 
 const innerClass = clsx(
-  'absolute w-full top-1/2 left-0 -translate-y-1/2 transform-gpu',
-  'flex flex-col items-center justify-center',
-  'will-change-transform'
+  "absolute w-full top-1/2 left-0 -translate-y-1/2 transform-gpu",
+  "flex flex-col items-center justify-center",
+  "will-change-transform",
 );
 ---
 
@@ -27,30 +27,32 @@ const innerClass = clsx(
     <div class="flex w-full relative items-center justify-center">
       <Picture
         class="object-cover opacity-0"
+        formats={["avif", "webp"]}
         src={fullpageWEBP}
-        widths={[320, 672, 768, 1344, 1536]}
-        sizes="(min-width: 768px) 50vw, 100vw"
+        widths={[320, 672, 768, 1344]}
+        sizes="(max-width: 1344px) 100vw, 1344px"
         alt=""
         data-animEcommerce="img"
+        alt="preview of Formi app"
       />
     </div>
   </div>
 </a>
 
 <script>
-  import anime from 'animejs';
-  import { getScrollPercent } from '../utils/getScrollPercent';
+  import anime from "animejs";
+  import { getScrollPercent } from "../utils/getScrollPercent";
 
   const imagesContainerEl = document.querySelector(
-    '[data-animEcommerce="img"]'
+    '[data-animEcommerce="img"]',
   ) as HTMLImageElement;
 
   if (imagesContainerEl) {
     const animation = anime({
       targets: imagesContainerEl,
-      translateY: ['-15%', '5%'],
+      translateY: ["-15%", "5%"],
       elasticity: 200,
-      easing: 'easeInOutSine',
+      easing: "easeInOutSine",
       autoplay: false,
     });
 
@@ -65,17 +67,17 @@ const innerClass = clsx(
         targets: imagesContainerEl,
         opacity: 1,
         duration: 500,
-        easing: 'easeInOutSine',
+        easing: "easeInOutSine",
       });
 
       onScrollHandler();
-      document.addEventListener('scroll', onScrollHandler);
+      document.addEventListener("scroll", onScrollHandler);
     };
 
     if (imagesContainerEl.complete) {
       init();
     } else {
-      imagesContainerEl.addEventListener('load', init);
+      imagesContainerEl.addEventListener("load", init);
     }
   }
 </script>

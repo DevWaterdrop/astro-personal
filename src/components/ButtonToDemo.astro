@@ -32,13 +32,13 @@
 
 <script>
   const button = document.querySelector(
-    '[data-demo-button]'
+    "[data-demo-button]",
   ) as HTMLButtonElement | null;
 
-  button?.addEventListener('click', () => {
-    const getDemoSection = document.getElementById('demo');
+  button?.addEventListener("click", () => {
+    const getDemoSection = document.getElementById("demo");
     if (!getDemoSection) return;
 
-    getDemoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    getDemoSection.scrollIntoView({ behavior: "smooth", block: "center" });
   });
 </script>

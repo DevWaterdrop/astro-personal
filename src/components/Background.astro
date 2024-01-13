@@ -1,16 +1,16 @@
 ---
-import clsx from 'clsx';
+import clsx from "clsx";
 
 const icons = [
-  { src: './icons/javascript.svg' },
-  { src: './icons/next.svg' },
-  { src: './icons/react.svg' },
+  { src: "./icons/javascript.svg" },
+  { src: "./icons/next.svg" },
+  { src: "./icons/react.svg" },
   {
-    src: './icons/anything.png',
-    overrideClass: 'min-w-[4rem] lg:min-w-[5rem]',
+    src: "./icons/anything.png",
+    overrideClass: "min-w-[4rem] lg:min-w-[5rem]",
   },
-  { src: './icons/typescript.svg' },
-  { src: './icons/nodejs.png', class: 'hidden md:block' },
+  { src: "./icons/typescript.svg" },
+  { src: "./icons/nodejs.png", class: "hidden md:block" },
 ];
 ---
 
@@ -23,8 +23,8 @@ const icons = [
       <div class="opacity-0 absolute" data-animBackground={`icon-${index}`}>
         <img
           class={clsx(
-            icon.overrideClass || 'min-w-[3rem] lg:min-w-[4rem]',
-            icon.class
+            icon.overrideClass || "min-w-[3rem] lg:min-w-[4rem]",
+            icon.class,
           )}
           src={icon.src}
         />
@@ -34,10 +34,10 @@ const icons = [
 </div>
 
 <script>
-  import anime from 'animejs';
+  import anime from "animejs";
 
-  const X = ['-325%', '200%', '-315%', '75%', '275%', '-65%'];
-  const Y = ['275%', '-115%', '-150%', '175%', '325%', '375%'];
+  const X = ["-325%", "200%", "-315%", "75%", "275%", "-65%"];
+  const Y = ["275%", "-115%", "-150%", "175%", "325%", "375%"];
   const ROTATES = [
     [35, -35],
     [-15, 15],
@@ -62,12 +62,12 @@ const icons = [
       translateY: y,
       rotate: rotate,
       opacity: { value: [0, 1], delay: delay + 100 },
-      easing: 'spring(1, 45, 10, 0)',
+      easing: "spring(1, 45, 10, 0)",
       delay,
     });
   }
 
-  const targets = document.querySelectorAll('[data-animBackground]');
+  const targets = document.querySelectorAll("[data-animBackground]");
 
   targets.forEach((element, index) => {
     const [children] = element.children;
@@ -75,14 +75,14 @@ const icons = [
     if (children && children instanceof HTMLImageElement) {
       function setupMouseEvent() {
         element.addEventListener(
-          'mouseenter',
+          "mouseenter",
           () => {
             return void anime({
               targets: children,
               rotate: () => anime.random(-360, 360),
             });
           },
-          false
+          false,
         );
       }
 

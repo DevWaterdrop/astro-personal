@@ -1,10 +1,15 @@
 ---
-const title = 'Waterdrop';
-const description = 'Hurevych Kostiantyn - Software engineer';
-const coverLink = 'https://www.waterdrop.dev/images/cover.png';
+import "@fontsource/nunito/400.css";
+import "@fontsource/nunito/600.css";
+import "@fontsource/nunito/700.css";
+import "@fontsource/nunito/800.css";
+
+const title = "Waterdrop";
+const description = "Hurevych Kostiantyn - Software engineer";
+const coverLink = "https://www.waterdrop.dev/images/cover.png";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,28 +24,27 @@ const coverLink = 'https://www.waterdrop.dev/images/cover.png';
     <meta name="twitter:image" content={coverLink} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#000000" />
+    <meta name="generator" content={Astro.generator} />
     <!-- Vercel -->
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
-
   <body class="flex flex-col min-h-screen text-black justify-between">
     <slot />
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Nunito', sans-serif;
-      }
-
-      html,
-      body {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        scroll-behavior: smooth;
-      }
-    </style>
   </body>
 </html>
+
+<style is:global>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Nunito", sans-serif;
+  }
+
+  html,
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+</style>

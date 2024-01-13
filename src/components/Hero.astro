@@ -1,14 +1,14 @@
 ---
-import clsx from 'clsx';
-import About from './About.astro';
-import Background from './Background.astro';
+import clsx from "clsx";
+import About from "./About.astro";
+import Background from "./Background.astro";
 
 const sectionClass = clsx(
-  'mx-auto max-w-screen-2xl px-6 pt-28 pb-12 relative overflow-hidden',
-  'flex flex-col justify-between',
-  'bg-white',
-  'sm:px-12 sm:pt-48 sm:pb-24',
-  'max-h-[52rem] h-[min(100vh, 100%)]'
+  "mx-auto max-w-screen-2xl px-6 pt-28 pb-12 relative overflow-hidden",
+  "flex flex-col justify-between",
+  "bg-white",
+  "sm:px-12 sm:pt-48 sm:pb-24",
+  "max-h-[52rem] h-[min(100vh, 100%)]",
 );
 ---
 
@@ -40,10 +40,10 @@ const sectionClass = clsx(
 </section>
 
 <script>
-  import anime from 'animejs';
+  import anime from "animejs";
 
   (() => {
-    const target = document.querySelector('#go-background');
+    const target = document.querySelector("#go-background");
 
     if (!target || !(target instanceof HTMLImageElement) || target.complete) {
       return;
@@ -54,7 +54,7 @@ const sectionClass = clsx(
       anime({
         targets: target,
         opacity: [0, 0.15],
-        easing: 'easeInOutQuad',
+        easing: "easeInOutQuad",
         duration: 300,
       });
     };
