@@ -1,6 +1,6 @@
 ---
 import clsx from "clsx";
-import { Picture } from 'astro:assets';
+import { Picture } from "astro:assets";
 import fullpageWEBP from "../../assets/demo-page.webp";
 
 const containerClass = clsx(
@@ -27,11 +27,13 @@ const innerClass = clsx(
     <div class="flex w-full relative items-center justify-center">
       <Picture
         class="object-cover opacity-0"
+        formats={["avif", "webp"]}
         src={fullpageWEBP}
-        widths={[320, 672, 768, 1344, 1536]}
-        sizes="(min-width: 768px) 50vw, 100vw"
+        widths={[320, 672, 768, 1344]}
+        sizes="(max-width: 1344px) 100vw, 1344px"
         alt=""
         data-animEcommerce="img"
+        alt="preview of Formi app"
       />
     </div>
   </div>
