@@ -1,5 +1,5 @@
 ---
-import Link from './Link.astro';
+import Link from "./Link.astro";
 ---
 
 <nav
@@ -33,35 +33,35 @@ import Link from './Link.astro';
 </nav>
 
 <script>
-  import anime from 'animejs';
+  import anime from "animejs";
 
-  import { getScrollPercent } from '../utils/getScrollPercent';
+  import { getScrollPercent } from "../utils/getScrollPercent";
 
-  const EASING = 'cubicBezier(0.1, 0.25, 0.3, 1)';
+  const EASING = "cubicBezier(0.1, 0.25, 0.3, 1)";
   const DURATION = 600;
   const PERCENTAGE_NAV_HIDDEN = 68;
   const PX_NAV_TRIGGER = 50;
 
-  const nav = document.querySelector('nav');
-  anime.set('nav', { translateY: '-25%', opacity: 0 });
+  const nav = document.querySelector("nav");
+  anime.set("nav", { translateY: "-25%", opacity: 0 });
 
   let prevScroll = window.scrollY;
   let hidden = true;
 
   function controllNav(reverse: boolean = false) {
-    if (!nav) throw new Error('<nav/> not found!');
+    if (!nav) throw new Error("<nav/> not found!");
 
-    anime.remove('nav');
+    anime.remove("nav");
 
     anime({
-      targets: 'nav',
-      translateY: reverse ? '-25%' : 0,
+      targets: "nav",
+      translateY: reverse ? "-25%" : 0,
       opacity: reverse ? 0 : 1,
       easing: EASING,
       duration: DURATION,
     });
 
-    nav.style.pointerEvents = reverse ? 'none' : 'auto';
+    nav.style.pointerEvents = reverse ? "none" : "auto";
   }
 
   function scroll() {
@@ -93,5 +93,5 @@ import Link from './Link.astro';
     hidden = false;
   }
 
-  window.addEventListener('scroll', scroll);
+  window.addEventListener("scroll", scroll);
 </script>
