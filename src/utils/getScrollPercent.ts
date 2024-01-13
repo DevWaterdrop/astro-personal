@@ -1,8 +1,16 @@
-export function getScrollPercent() {
-  const h = document.documentElement;
-  const b = document.body;
-  const st = "scrollTop";
-  const sh = "scrollHeight";
+export const getScrollPercent = () => {
+  const { documentElement, body } = document;
 
-  return ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
-}
+  const {
+    scrollTop: scrollTopDocument,
+    scrollHeight: scrollHeightDocument,
+    clientHeight: clientHeightDocument,
+  } = documentElement;
+
+  const { scrollTop: scrollTopBody, scrollHeight: scrollHeightBody } = body;
+
+  const scrollTop = scrollTopDocument || scrollTopBody;
+  const scrollHeight = scrollHeightDocument || scrollHeightBody;
+
+  return (scrollTop / (scrollHeight - clientHeightDocument)) * 100;
+};
