@@ -1,0 +1,30 @@
+---
+import Line from "./Line.astro";
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<Line className={className}>
+  <h1>
+    <slot />
+  </h1>
+</Line>
+
+<style lang="scss" is:global>
+  .line-wrapper:has(h1) {
+    --heading-font-size: calc(var(--font-size) * 2);
+
+    margin-bottom: var(--padding);
+    font-size: var(--heading-font-size);
+    font-weight: 700;
+    line-height: 1.5;
+
+    h1 {
+      font-size: var(--heading-font-size);
+    }
+  }
+</style>

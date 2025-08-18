@@ -1,3 +1,3 @@
 # My personal website 🏡
 
-Stack: Astro, Anime.js, Tailwind
+Pure CSS, `0` JavaScript

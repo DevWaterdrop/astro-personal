@@ -1,0 +1,21 @@
+@use "sass:map";
+@use "./variables.scss" as *;
+
+@function getLine($index: number) {
+  @return map.get($merged-map, $index, title);
+}
+
+:export {
+  name: getLine(1);
+  description1: getLine(2);
+  description2: getLine(3);
+  description3: getLine(4);
+  job1: getLine(5);
+  job2: getLine(6);
+  job3: getLine(7);
+  languages: getLine(8);
+  education: getLine(9);
+  mail: getLine(10);
+  github: getLine(11);
+  ps: getLine(12);
+}

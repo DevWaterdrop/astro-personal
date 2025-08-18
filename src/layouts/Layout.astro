@@ -1,11 +1,6 @@
 ---
-import "@fontsource/nunito/400.css";
-import "@fontsource/nunito/600.css";
-import "@fontsource/nunito/700.css";
-import "@fontsource/nunito/800.css";
-
 const title = "Waterdrop";
-const description = "Hurevych Kostiantyn - Software engineer";
+const description = "Kostiantyn Hurevych - Software engineer";
 const coverLink = "https://www.waterdrop.dev/images/cover.png";
 ---
 
@@ -28,23 +23,7 @@ const coverLink = "https://www.waterdrop.dev/images/cover.png";
     <!-- Vercel -->
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
-  <body class="flex flex-col min-h-screen text-black justify-between">
+  <body>
     <slot />
   </body>
 </html>
-
-<style is:global>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Nunito", sans-serif;
-  }
-
-  html,
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
-  }
-</style>

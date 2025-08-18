@@ -1,0 +1,126 @@
+---
+import { globalState } from "virtual:global-state";
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<div class:list={["line-wrapper", `variables-${globalState.index}`, className]}>
+  <div class="typewriter">
+    <slot />
+  </div>
+</div>
+
+<style lang="scss" is:global>
+  @use "sass:map";
+  @use "sass:list";
+  @use "../assets/variables.scss" as *;
+  @use "../assets/typewriter.scss" as *;
+
+  @function get-previous-duration-sum($target-index) {
+    $sum: 0s;
+    $current-index: 1;
+
+    @for $i from 1 through list.length($merged-map) {
+      @if $current-index == $target-index {
+        @return $sum;
+      } @else {
+        $sum: $sum + map.get($merged-map, $i, duration);
+        $current-index: $current-index + 1;
+      }
+    }
+
+    @return $sum;
+  }
+
+  @for $i from 1 through list.length($merged-map) {
+    $current: map.get($merged-map, $i);
+    $previous-duration-sum: 0s;
+    $factor: 0.5;
+
+    @if $i != 1 {
+      $previous-duration-sum: get-previous-duration-sum($i);
+    }
+
+    .variables-#{$i - 1} {
+      --factor: #{$factor};
+      --line-duration: #{map.get($current, duration)};
+      --line-keyframe: #{map.get($current, keyframe)};
+      --pervious-line-duration-sum: #{$previous-duration-sum * $factor};
+    }
+
+    @include typewriter-animation(
+      map.get($current, keyframe),
+      map.get($current, title)
+    );
+  }
+</style>
+
+<style lang="scss" is:global>
+  @use "../assets/variables.scss" as *;
+  @use "../assets/typewriter.scss" as *;
+
+  .line-wrapper {
+    $hover-transition-duration: 350ms;
+
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-light);
+    padding: 0 2rem;
+
+    // Prevent hover, focus, etc. transition
+    animation: line-wrapper-prevent var(--pervious-line-duration-sum)
+      var(--timing-function);
+    animation-iteration-count: 1;
+
+    transition-property: color, background-color;
+    transition-duration: $hover-transition-duration;
+    transition-timing-function: var(--timing-function);
+
+    &:hover,
+    &:focus-visible,
+    &:focus-within {
+      transition-duration: 0ms;
+      background-color: var(--color-dark);
+      color: var(--color-light);
+    }
+  }
+
+  @keyframes line-wrapper-reveal {
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes line-wrapper-prevent {
+    to,
+    from {
+      pointer-events: none;
+      background-color: var(--color-light);
+      color: var(--color-dark);
+    }
+  }
+
+  .typewriter {
+    position: relative;
+    display: flex;
+
+    & > * {
+      width: 100%;
+      color: transparent;
+    }
+
+    &::after {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: var(--line-keyframe) var(--line-duration)
+        var(--timing-function) forwards var(--pervious-line-duration-sum);
+    }
+  }
+</style>

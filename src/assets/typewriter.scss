@@ -1,0 +1,99 @@
+@use "sass:string";
+@use "sass:map";
+@use "sass:list";
+@use "sass:math";
+
+$typewriter-symbols: (
+  1: "@",
+  2: "#",
+  3: "%",
+  4: "&",
+  5: "*",
+  6: "?",
+  7: "!",
+  8: "~",
+  9: "+",
+  10: "=",
+) !default;
+
+// Helper function to get random symbol from map
+@function get-random-symbol($index) {
+  $symbol-count: list.length($typewriter-symbols);
+  $random-index: ($index % $symbol-count) + 1;
+  @return map.get($typewriter-symbols, $random-index);
+}
+
+@function get-total-duration(
+  $text,
+  $char-pause: 2ms,
+  $symbol-pause: 10ms,
+  $symbol-count: 3
+) {
+  $length: string.length($text);
+  @return ($char-pause + ($symbol-pause * $symbol-count)) * $length;
+}
+
+// Mixin to generate typewriter keyframes
+@mixin generate-typewriter-keyframes(
+  $keyframe-name,
+  $text,
+  $char-pause: 2ms,
+  $symbol-pause: 10ms,
+  $symbol-count: 3
+) {
+  $length: string.length($text);
+  $total-duration: get-total-duration(
+    $text,
+    $char-pause,
+    $symbol-pause,
+    $symbol-count
+  );
+
+  $current-time: 0ms;
+  $current-text: "";
+
+  @keyframes #{$keyframe-name} {
+    0% {
+      content: "";
+    }
+
+    // Generate keyframes for each character
+    @for $i from 1 through $length {
+      $char: string.slice($text, $i, $i);
+
+      // Add symbol animation keyframes before each character
+      @for $s from 1 through $symbol-count {
+        $symbol: get-random-symbol($i + $s);
+        $symbol-text: $current-text + $symbol;
+        $percentage: math.percentage(calc($current-time / $total-duration)) +
+          0%;
+
+        #{$percentage} {
+          content: "#{$symbol-text}" / "";
+        }
+
+        $current-time: $current-time + $symbol-pause;
+      }
+
+      // Add the actual character
+      $current-text: $current-text + $char;
+      $percentage: math.percentage(calc($current-time / $total-duration)) + 0%;
+
+      #{$percentage} {
+        content: "#{$current-text}" / "";
+      }
+
+      $current-time: $current-time + $char-pause;
+    }
+
+    100% {
+      content: "#{$text}" / "";
+    }
+  }
+}
+
+@mixin typewriter-animation($keyframe-name, $text) {
+  @at-root {
+    @include generate-typewriter-keyframes($keyframe-name, $text);
+  }
+}

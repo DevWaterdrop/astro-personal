@@ -1,0 +1,15 @@
+---
+import Line from "./Line.astro";
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<Line className={className}>
+  <p>
+    <slot />
+  </p>
+</Line>

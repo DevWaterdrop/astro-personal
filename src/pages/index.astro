@@ -1,20 +1,118 @@
 ---
-import Demo from "../components/Demo.astro";
-import Footer from "../components/Footer.astro";
-import Gap from "../components/Gap.astro";
-import Header from "../components/Header.astro";
-import Hero from "../components/Hero.astro";
-import Layout from "../layouts/Layout.astro";
-import ButtonToDemo from "../components/ButtonToDemo.astro";
+import { Font } from "astro:assets";
+import exports from "@/assets/exports.module.scss";
+import { unquoteString } from "@/utils/unquoteString";
+import Layout from "@/layouts/Layout.astro";
+import Paragraph from "@/components/Paragraph.astro";
+import Link from "@/components/Link.astro";
+import Heading from "@/components/Heading.astro";
+
+// FIXME: Sass `string.unquote` throws an error
+const unquotedExports = Object.entries(exports).reduce<Record<string, string>>(
+  (obj, [key, value]) => {
+    obj[key] = unquoteString(value);
+    return obj;
+  },
+  {},
+);
+
+const {
+  name,
+  description1,
+  description2,
+  description3,
+  job1,
+  job2,
+  job3,
+  languages,
+  education,
+  mail,
+  github,
+  ps,
+} = unquotedExports;
 ---
 
 <Layout>
-  <Header />
-  <main class="flex flex-col flex-1 min-h-[min(100vh,60rem)]">
-    <Hero />
-    <ButtonToDemo />
-    <Demo />
-    <Gap />
+  <Font cssVariable="--font" preload />
+
+  <main>
+    <Heading>{name}</Heading>
+
+    <Paragraph>{description1}</Paragraph>
+    <Paragraph>{description2}</Paragraph>
+    <Paragraph>{description3}</Paragraph>
+
+    <ul>
+      <li><Link href="https://software.meyersound.com/">{job1}</Link></li>
+      <li><Link href="https://meetergo.com">{job2}</Link></li>
+      <li><Link href="http://www.halo-lab.com">{job3}</Link></li>
+    </ul>
+
+    <Paragraph>{languages}</Paragraph>
+    <Paragraph>{education}</Paragraph>
   </main>
-  <Footer />
+
+  <footer>
+    <Link href="mailto: dev.waterdrop@gmail.com">{mail}</Link>
+    <Link href="https://github.com/DevWaterdrop">{github}</Link>
+  </footer>
+
+  <aside>
+    <Paragraph>{ps}</Paragraph>
+  </aside>
 </Layout>
+
+<style lang="scss" is:global>
+  :root {
+    --color-dark: rgb(25, 25, 25);
+    --color-light: rgb(255, 255, 255);
+    --color-action: rgb(80, 80, 80);
+    --color-secondary: rgb(130, 130, 130);
+    --font-size: min(3.75dvw, 4dvh);
+    --timing-function: ease-in-out;
+    --padding: 1.5rem;
+  }
+
+  * {
+    box-sizing: border-box;
+    outline: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    overflow-x: hidden;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+
+    font-family: var(--font);
+    font-size: var(--font-size);
+    font-weight: 300;
+    line-height: 1.25;
+  }
+
+  ul {
+    padding: var(--padding) 0;
+    color: var(--color-action);
+    font-weight: 500;
+    list-style: none;
+  }
+
+  footer {
+    padding-top: calc(var(--padding) * 2);
+    color: var(--color-action);
+    font-weight: 500;
+  }
+
+  aside {
+    padding-top: calc(var(--padding) * 4);
+    font-size: calc(var(--font-size) * 0.5);
+    color: var(--color-secondary);
+  }
+</style>

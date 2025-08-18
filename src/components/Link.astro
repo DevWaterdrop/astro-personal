@@ -1,83 +1,29 @@
 ---
-import clsx from "clsx";
+import Line from "./Line.astro";
 
 interface Props {
   href: string;
-  classes?: string;
-  external?: boolean;
-  type?: "nav" | "regular";
-  animate?: boolean;
+  className?: string;
 }
 
-const {
-  href,
-  classes,
-  external = false,
-  type = "regular",
-  animate = true,
-} = Astro.props as Props;
-
-const linkProps = external ? { target: "_blank", rel: "noreferrer" } : {};
-
-const linkClass = clsx(
-  "transition-opacity hover:opacity-100",
-  type === "regular" &&
-    "opacity-60 inline-flex items-center relative nav-underline",
-  type === "nav" && "opacity-[0.55]",
-  classes,
-);
+const { className, href } = Astro.props;
 ---
 
-<a
-  class={linkClass}
-  {...linkProps}
-  href={href}
-  data-animLink={animate ? "block" : "no-anim"}
->
-  <p class="flex-col w-fit overflow-hidden relative inline-flex">
-    <span data-animLink="upper">
-      <slot />
-    </span>
-    <span class="absolute" aria-hidden="true" data-animLink="bottom">
-      <slot />
-    </span>
-  </p>
-</a>
+<Line className={className}>
+  <a href={href} target="_blank" rel="noreferrer">
+    <slot />
+  </a>
+</Line>
 
-<script>
-  import anime from "animejs";
+<style lang="scss" is:global>
+  .line-wrapper:has(a) {
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
 
-  const linkElements = document.querySelectorAll('[data-animLink="block"]');
-
-  linkElements.forEach((element) => {
-    const upperElement = element.querySelector('[data-animLink="upper"]');
-    const bottomElement = element.querySelector('[data-animLink="bottom"]');
-
-    element.addEventListener("mouseenter", () => {
-      anime({
-        targets: upperElement,
-        translateY: [0, "-100%"],
-        easing: "spring()",
-      });
-
-      anime({
-        targets: bottomElement,
-        translateY: ["100%", 0],
-        easing: "spring()",
-      });
-    });
-  });
-</script>
-
-<style>
-  .nav-underline::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    bottom: 0;
-    left: 0;
-    opacity: 0.15;
-    background: currentColor;
+    .typewriter {
+      &::after {
+        text-decoration-line: underline;
+      }
+    }
   }
 </style>
